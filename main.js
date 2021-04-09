@@ -1,38 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.querySelector('body');
-  const board = document.querySelector('#board');
+document.querySelector('#button-id').addEventListener('click', function(){
+  
+  const expenses = document.querySelector('#expenses').value
+  const income = document.querySelector('#income').value
+  const price = document.querySelector('#price').value
+  const savings = document.querySelector('#savings').value
+  
+  console.log(expenses)
+  console.log(income)
+  console.log(price)
+  console.log(savings)
 
-  const head = new Head(board);
-    //define function to make new head
+  if ((income - expenses - price) < savings){
+    const no = document.createElement('p')
+    no.innerHTML = 'WHAT ARE YOU THINKING?!?!'
+    console.log(no)
+    document.querySelector('.result').appendChild(no);
 
-    function newHead(){
-    
-    }
+    const what = document.createElement('img')
+    what.setAttribute('src' , '\\images\\pics\\what-are-you-5c3e8a.jpg')
+    document.querySelector('.result').appendChild(what);
+  }
 
-  body.addEventListener('keydown', (e) => {
-    
-    console.log("head", head)
-    // let topPosition = Number(head.style.top.replace('px', ''));
-    // let leftPosition = Number(head.style.left.replace('px', ''));
-    if (e.code === 'ArrowLeft') {
-      console.log('pressed left');
-      head.moveLeft()
-    }
+  if ((income - expenses - price) >= savings){
+    const yes = document.createElement('p')
+    yes.innerHTML = 'TREAT YO SELF!!!'
+    console.log(yes)
+    document.querySelector('.result').appendChild(yes);
 
-    if (e.code === 'ArrowRight') {
-      console.log('pressed right');
-      head.moveRight()
-    }
-
-    if (e.code === 'ArrowUp') {
-      console.log('pressed up');
-      
-    }
-
-    if (e.code === 'ArrowDown') {
-      console.log('pressed down');
-      head.currentDirection = 'down';
-    }
-  });
+    const treat = document.createElement('img')
+    treat.setAttribute('src' , '\\images\\pics\\treat.jpeg')
+    document.querySelector('.result').appendChild(treat);
+  }
+  
 });
-
