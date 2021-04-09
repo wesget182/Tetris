@@ -13,7 +13,8 @@ document.querySelector('#button-id').addEventListener('click', function(){
   if ((income - expenses - price) < savings){
     const no = document.createElement('p')
     no.innerHTML = 'WHAT ARE YOU THINKING?!?!'
-    console.log(no)
+    no.style.display = "inline"
+    no.style.fontSize = "100px"
     document.querySelector('.result').appendChild(no);
 
     const what = document.createElement('img')
@@ -25,7 +26,6 @@ document.querySelector('#button-id').addEventListener('click', function(){
     
     const whatAudioSource = document.createElement('source')
     whatAudioSource.setAttribute('src', '\\assets\\audio\\what.mp3')
-    
     whatAudio.appendChild(whatAudioSource);
     whatAudio.setAttribute('autoplay', 'true');
   }
@@ -33,7 +33,7 @@ document.querySelector('#button-id').addEventListener('click', function(){
   if ((income - expenses - price) >= savings){
     const yes = document.createElement('p')
     yes.innerHTML = 'TREAT YO SELF!!!'
-    console.log(yes)
+    yes.style.fontSize = "100px"
     document.querySelector('.result').appendChild(yes);
 
     const treat = document.createElement('img')
