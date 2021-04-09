@@ -1,11 +1,11 @@
 document.querySelector('#button-id').addEventListener('click', function(){
   
-  const expenses = document.querySelector('#expenses').value
-  const income = document.querySelector('#income').value
-  const price = document.querySelector('#price').value
-  const savings = document.querySelector('#savings').value
+  const expenses = document.querySelector('#expenses').value.split('').filter(el => el !== "$").join('')
+  const income = document.querySelector('#income').value.split('').filter(el => el !== "$").join('')
+  const price = document.querySelector('#price').value.split('').filter(el => el !== "$").join('')
+  const savings = document.querySelector('#savings').value.split('').filter(el => el !== "$").join('')
   
-  console.log(expenses)
+  console.log(expenses.split('').filter(el => el !== "$").join(''))
   console.log(income)
   console.log(price)
   console.log(savings)
@@ -15,11 +15,11 @@ document.querySelector('#button-id').addEventListener('click', function(){
     no.innerHTML = 'WHAT ARE YOU THINKING?!?!'
     no.style.display = "inline"
     no.style.fontSize = "100px"
-    document.querySelector('.result').appendChild(no);
+    document.querySelector('.col-md-4').appendChild(no);
 
     const what = document.createElement('img')
-    what.setAttribute('src' , '\\assets\\images\\what-are-you-5c3e8a.jpg')
-    document.querySelector('.result').appendChild(what);
+    what.setAttribute('src' , '\\assets\\images\\what.gif')
+    document.querySelector('.col-md-4').appendChild(what);
 
     const whatAudio = document.createElement('audio')
     document.querySelector('.result').appendChild(whatAudio);
@@ -32,13 +32,14 @@ document.querySelector('#button-id').addEventListener('click', function(){
 
   if ((income - expenses - price) >= savings){
     const yes = document.createElement('p')
+    
     yes.innerHTML = 'TREAT YO SELF!!!'
     yes.style.fontSize = "100px"
-    document.querySelector('.result').appendChild(yes);
+    document.querySelector('.col-md-4').appendChild(yes);
 
     const treat = document.createElement('img')
-    treat.setAttribute('src' , '\\assets\\images\\treat.jpeg')
-    document.querySelector('.result').appendChild(treat);
+    treat.setAttribute('src' , '\\assets\\images\\treat.gif')
+    document.querySelector('.col-md-4').appendChild(treat);
 
     
     const treatAudio = document.createElement('audio')
