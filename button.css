@@ -1,0 +1,26 @@
+#board{
+  height: 560px;
+  width: 500px;
+  background-color: lightgray;
+  position: absolute;
+}
+
+
+
+button.current {
+  box-shadow: 0 0 0 2px white,
+              0 0 0 4px black;
+}
+
+body{
+  height: 565px;
+  width: 750px;
+  
+}
+
+#head{
+  background-color: blue;
+  height: 10px;
+  width: 10px;
+  position: relative;
+}
