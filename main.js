@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridWidth = 10;
   const gridHeight = 20;
   const gridArea = gridHeight * gridWidth;
-
+  const blocked = {201:'',202:'',203:'',204:'',205:'',206:'',207:'',208:'',209:'' };
+  const colors 
 
   let newGrid = makeGrid();
   // const squares = Array.from(newGrid.querySelector('#gridEl'))
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gridElement.style.width = '25px'
         // gridElement.style.background = 'yellow'
         grid.appendChild(gridElement);
-      
+        squares.push(gridElement)
     }
     return squares;
   }
@@ -42,30 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const zTetramino = [[gridWidth, gridWidth+1, gridWidth*2-1,gridWidth*2],
                       [-1,gridWidth-1,gridWidth,gridWidth*2],
                       [gridWidth, gridWidth+1, gridWidth*2-1,gridWidth*2],
-                      [-1,gridWidth-1,gridWidth,gridWidth*2]]
+                      [-1,gridWidth-1,gridWidth,gridWidth*2]];
   
   const lTetramino = [[0, 1, gridWidth, gridWidth*2],
                       [gridWidth-1, gridWidth, gridWidth+1, gridWidth*2+1],
                       [0, gridWidth, gridWidth*2-1, gridWidth*2],
-                      [gridWidth-1, gridWidth*2-1, gridWidth*2, gridWidth*2+1]]
+                      [gridWidth-1, gridWidth*2-1, gridWidth*2, gridWidth*2+1]];
 
   const tTetramino = [[0, gridWidth-1, gridWidth, gridWidth+1],
                       [0, gridWidth, gridWidth+1, gridWidth*2],
                       [gridWidth-1, gridWidth, gridWidth+1,gridWidth*2],
-                      [0, gridWidth-1, gridWidth, gridWidth*2]]      
+                      [0, gridWidth-1, gridWidth, gridWidth*2]];      
 
   const sqTetramino =[[0,1,gridWidth,gridWidth+1],
                       [0,1,gridWidth,gridWidth+1],
                       [0,1,gridWidth,gridWidth+1],
-                      [0,1,gridWidth,gridWidth+1]]
+                      [0,1,gridWidth,gridWidth+1]];
 
   const longTetramino = [[0,gridWidth,gridWidth*2,gridWidth*3],
                          [gridWidth-2, gridWidth-1, gridWidth, gridWidth+1],
                          [0,gridWidth,gridWidth*2,gridWidth*3],
-                         [gridWidth-2, gridWidth-1, gridWidth, gridWidth+1]]
+                         [gridWidth-2, gridWidth-1, gridWidth, gridWidth+1]];
 
   let rotation = 0;
-  const random = Math.floor(Math.random() * 4);
+  let random = Math.floor(Math.random() * 4);
+  
 
   const tetraminoes = [zTetramino, lTetramino, tTetramino, sqTetramino, longTetramino]
   let currentPiece = tetraminoes[random][rotation]       
@@ -78,61 +80,86 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  // draw();
+  draw();
   function undraw(){
-    currentPiece.forEach(el => {
-      newGrid[currentPosition + el].classList.remove('currentPiece')
-      newGrid[currentPosition + el].style.background = 'none';
+    document.querySelectorAll(".currentPiece").forEach(el => {
+      el.classList.remove('currentPiece')
+      el.style.background = 'none';
     })
   }
   
 
-  function freeze(){
-    if (currentPiece === bottom) Array.push()
-    else if {}
-  }
 
   function move(){
-    undraw()
-    currentPosition += gridWidth
-    draw()
-    console.log(currentPiece)
+    let preUpdate = currentPiece.map(el => currentPosition + el)
+    currentPosition += gridWidth 
     let updated = currentPiece.map(el => currentPosition + el)
-    console.log(updated)
+    
+    freeze()
+    undraw()
+    draw()
+            
     setTimeout(move, speed)
     
+
+    function freeze(){
+      if(updated.some(el => blocked[el] !== undefined)){
+        preUpdate.forEach(el => blocked[el] = "");
+        let frozen = document.querySelectorAll(".currentPiece")
+        frozen.forEach(el => el.classList.remove('currentPiece'))
+        frozen.forEach(el => el.classList.add('blocked'))
+
+        currentPosition = 4
+        random = Math.floor(Math.random() * 4)
+        currentPiece = tetraminoes[random][rotation] 
+      }
+    }
   }
 
   function moveLeft(){
-    undraw()
-    currentPosition -= 1
-    draw()
-    //add check for walls
+    let updated = currentPiece.map(el => currentPosition + el -1)
+    const atLeftWall = updated.some(el => (el+1) % gridWidth === 0)
+    
+    if(!(atLeftWall || updated.some(el => blocked[el] !== undefined))){
+        undraw()
+        currentPosition -= 1
+        draw()
+      }
   }
 
   function moveRight(){
-    undraw()
-    currentPosition +=1
-    draw()
-    //add check for walls
+
+    let updated = currentPiece.map(el => currentPosition + el)
+    const atRightWall = updated.some(el => el % gridWidth === gridWidth-1)
+    
+    if(!(atRightWall || updated.some(el => blocked[el] !== undefined))){
+        undraw()
+        currentPosition += 1
+        draw()
+      }
+
   }
 
   function moveDown(){
-    undraw()
-    currentPosition += gridWidth
-    draw()
+    let updated = currentPiece.map(el => currentPosition + el + gridWidth);
+    
+    if(!(updated.some(el => blocked[el] !== undefined))){
+      undraw();
+      currentPosition += gridWidth;
+      draw();
+    }
   }
 
   function rotate(){
-    undraw()
+    undraw();
     if (rotation < 3){
       rotation += 1;
     } 
     else {
-      rotation = 0
+      rotation = 0;
     }
-    currentPiece = tetraminoes[random][rotation]
-    draw()
+    currentPiece = tetraminoes[random][rotation];
+    draw();
   }
 
   body.addEventListener('keydown', (e) => {
