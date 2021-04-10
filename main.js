@@ -17,7 +17,7 @@ document.querySelector('#button-id').addEventListener('click', function(){
     document.querySelector('.result').appendChild(no);
 
     const what = document.createElement('img')
-    what.setAttribute('src' , '\\images\\pics\\what-are-you-5c3e8a.jpg')
+    what.setAttribute('src' , '\\images\\pics\\what.gif')
     document.querySelector('.result').appendChild(what);
   }
 
@@ -28,7 +28,7 @@ document.querySelector('#button-id').addEventListener('click', function(){
     document.querySelector('.result').appendChild(yes);
 
     const treat = document.createElement('img')
-    treat.setAttribute('src' , '\\images\\pics\\treat.jpeg')
+    treat.setAttribute('src' , '\\images\\pics\\treat.gif')
     document.querySelector('.result').appendChild(treat);
   }
   
