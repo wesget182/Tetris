@@ -183,6 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
       moveDown();
     }
   });
-  move();
+  
 });
 
