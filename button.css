@@ -1,21 +1,21 @@
 #board{
   height: 525px;
   width: 250px;
-  background-color: lightgray;
+  background-color: rgb(43, 41, 41); 
   position: absolute;
   display: flex;
   flex-wrap: wrap;
 }
-
+//rgb(250, 250, 250);
 .currentPiece{
   background-color: purple;
 }
 
 
-button.current {
+/* button.current {
   box-shadow: 0 0 0 2px white,
               0 0 0 4px black;
-}
+} */
 
 body{
   height: 550px;
@@ -28,4 +28,26 @@ body{
   height: 10px;
   width: 10px;
   position: relative;
+}
+
+.block3{
+  background: yellow;
+}
+
+
+
+button{
+  height: 25px;
+  width: 50px;
+  display: flex;
+  align-self: center;
+  margin-left: 100px;
+  align-items: center;
+  justify-items: center;
+  border-radius: 3px;
+  /* box-shadow: 0 0 0 2px white,
+              0 0 0 4px black; */
+  background-color: orange;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
 }
